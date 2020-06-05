@@ -1,0 +1,17 @@
+{
+  "name": "NoiseFit",
+  "displayName": "NoiseFit",
+  "expo": {
+    "name": "NoiseFit",
+    "slug": "expo-template-bare",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
