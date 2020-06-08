@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import StepsReducer from './StepsReducer';
+import PointsReducer from './PointsReducer';
 
 export const reducers = combineReducers({
-    stepsCount: StepsReducer
+    stepsCount: StepsReducer,
+    points: PointsReducer
 })

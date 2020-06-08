@@ -1,25 +1,31 @@
 import AppleHealthKit from "rn-apple-healthkit";
 const PERMS = AppleHealthKit.Constants.Permissions;
 
-const healthKitOptions = {
+const healthKitPermissions = {
   permissions: {
-    read: [PERMS.StepCount, PERMS.Height],
-    write: [PERMS.StepCount],
+    read: [PERMS.StepCount, PERMS.DistanceWalkingRunning]
   },
 };
 
-export const getStepCounts = () => {
+const healthKitOptions = {
+    date: new Date().toISOString()
+}
+
+export const fetchFitnessApi = (options) => {
+    /**
+     * pass date in options arugement. If not, then it will give today's data
+     */
+    
   return new Promise((resolve, reject) => {
-    AppleHealthKit.initHealthKit(healthKitOptions, (err, results) => {
+    AppleHealthKit.initHealthKit(healthKitPermissions, (err, results) => {
       if (err) {
-        console.log("error initializing Healthkit: ", err);
-        return;
+        reject(err);
       }
-      AppleHealthKit.getStepCount(healthKitOptions, (err, results) => {
-        if (err) {
-          reject(err);
-        }
-        resolve(results);
+      AppleHealthKit.getStepCount(options || healthKitOptions, (err, steps) => {
+        AppleHealthKit.getDistanceWalkingRunning( options || healthKitOptions, (err, distance) => {
+            const result = { steps, distance};
+            resolve(result);
+          });
       });
     });
   });

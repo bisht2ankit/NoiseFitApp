@@ -1,10 +1,23 @@
-import React, { FunctionComponent, useEffect } from "react";
-import { StyleSheet, View, Animated, Easing, Platform } from "react-native";
+import React, { memo, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  Animated,
+  Easing,
+  Platform,
+  Text,
+} from "react-native";
 import PropTypes from "prop-types";
 import { colors } from "../constants/colors";
+import { fontSize } from "../constants/fontSize";
 
-export const CircularProgress = (props) => {
-  const {activeColor, passiveColor, baseColor, radius, done, width, duration, children} = props;
+export const CircularProgress = memo(({ done, count }) => {
+  const activeColor = colors.GREEN;
+  const passiveColor = colors.APP_BLACK_THEME;
+  const width = 30;
+  const radius = 100;
+  const duration = 2000;
+
   const initialValueHalfCircle = done >= 50 ? 0 : 180;
   const initialValueInnerCircle = 0;
   const animatedValue1 = new Animated.Value(initialValueHalfCircle);
@@ -130,44 +143,34 @@ export const CircularProgress = (props) => {
             },
           ]}
         >
-          {children}
+          <Text style={styles.bigTxt}>{count}</Text>
+          <Text style={styles.regularTxt}>Steps</Text>
         </View>
       </View>
     </View>
   );
-};
+});
 
 CircularProgress.propTypes = {
-    activeColor: PropTypes.string,
-    passiveColor: PropTypes.string,
-    baseColor: PropTypes.string,
-    width: PropTypes.number,
-    radius: PropTypes.number,
-    done: PropTypes.number,
-    duration: PropTypes.number,
+  activeColor: PropTypes.string,
+  passiveColor: PropTypes.string,
+  width: PropTypes.number,
+  radius: PropTypes.number,
+  done: PropTypes.number,
+  duration: PropTypes.number,
 };
-
-CircularProgress.defaultProps = {
-    activeColor: colors.GREEN,
-    passiveColor: colors.APP_BLACK_THEME,
-    baseColor: 'white',
-    width: 30,
-    radius: 100,
-    duration: 2000,
-}
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignSelf: 'center',
-    marginTop: 10
+    alignSelf: "center",
+    marginTop: 10,
   },
   outer: {
     position: "relative",
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
-    borderColor: 'white', 
+    borderColor: "white",
     borderWidth: 1,
   },
   half: {
@@ -176,5 +179,15 @@ const styles = StyleSheet.create({
     top: 0,
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
+  },
+  bigTxt: {
+    fontSize: fontSize.bigTitle,
+    color: "white",
+    textAlign: "center",
+  },
+  regularTxt: {
+    fontSize: fontSize.title,
+    color: "white",
+    textAlign: "center",
   },
 });

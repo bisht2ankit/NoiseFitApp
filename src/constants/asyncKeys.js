@@ -1,0 +1,1 @@
+export const APP_INSTALLED_DATE = 'APP_INSTALLED_DATE';

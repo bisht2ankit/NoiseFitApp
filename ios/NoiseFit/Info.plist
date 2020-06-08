@@ -77,5 +77,7 @@
   <string>Read and understand health data.</string>
   <key>NSHealthUpdateUsageDescription</key>
   <string>Share workout data with other apps.</string>
+  <key>UIUserInterfaceStyle</key>
+  <string>Light</string>
 </dict>
 </plist>

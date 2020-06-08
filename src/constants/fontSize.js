@@ -1,4 +1,4 @@
 export const fontSize = {
     bigTitle: 36,
-    title: 20
+    title: 22
 }

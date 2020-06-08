@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { constants } from "../constants/strings";
 import HomeScreen from "../screens/HomeScreen";
-import { ProfileScreen } from "../screens/ProfileScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 import { colors } from "../constants/colors";
 const Tab = createBottomTabNavigator();
 import homeIcon from "../assets/home.png";
