@@ -27,7 +27,6 @@
     "react-native-unimodules": "~0.9.0",
     "react-native-web": "~0.11.7",
     "react-redux": "^7.2.0",
-    "realm": "^6.0.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rn-apple-healthkit": "^0.8.0"
