@@ -4,6 +4,6 @@ import { colors } from "./colors";
 export const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.APP_THEME_COLOR
+        backgroundColor: colors.APP_BLACK_THEME
     }
 })

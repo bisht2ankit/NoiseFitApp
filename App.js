@@ -1,12 +1,16 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
-import { HomeScreen } from "./src/screens/HomeScreen";
 import Routes from "./src/routes";
+import { Provider } from "react-redux";
+import { store } from "./src/store";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { globalStyles } from "./src/constants/globalStyles";
 
 export default App = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Routes />
-    </SafeAreaView>
+      <Provider store={store}>
+        <SafeAreaView style={globalStyles.container}>
+          <Routes />
+        </SafeAreaView>
+      </Provider>
   );
 };

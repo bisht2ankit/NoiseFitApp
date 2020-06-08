@@ -43,4 +43,6 @@ target 'NoiseFit' do
 
   # react-native-cli autolinking
   use_native_modules!
+  pod 'react-native-fitness', :path => '../node_modules/@ovalmoney/react-native-fitness'
+
 end

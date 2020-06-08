@@ -3,7 +3,7 @@ import { Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { constants } from "../constants/strings";
-import { HomeScreen } from "../screens/HomeScreen";
+import HomeScreen from "../screens/HomeScreen";
 import { ProfileScreen } from "../screens/ProfileScreen";
 import { colors } from "../constants/colors";
 const Tab = createBottomTabNavigator();

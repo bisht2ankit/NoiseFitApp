@@ -1,0 +1,1 @@
+export const TARGET_STEPS = 5000;

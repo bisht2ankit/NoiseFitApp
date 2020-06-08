@@ -42,20 +42,15 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
-	<key>NSAppTransportSecurity</key>
-	<!--See http://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/ -->
-	<dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
+  <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+      <key>NSAllowsArbitraryLoadsInWebContent</key>
+      <true/>
+      <key>NSAllowsLocalNetworking</key>
+      <true/>
+    </dict>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Allow NoiseFit to access your calendar</string>
 	<key>NSCameraUsageDescription</key>
@@ -78,5 +73,9 @@
 	<string>Give NoiseFit periences permission to access your photos</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>Allow NoiseFit to access your reminders</string>
+  <key>NSHealthShareUsageDescription</key>
+  <string>Read and understand health data.</string>
+  <key>NSHealthUpdateUsageDescription</key>
+  <string>Share workout data with other apps.</string>
 </dict>
 </plist>

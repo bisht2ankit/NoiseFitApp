@@ -1,0 +1,1 @@
+export const STEPS_COUNT = 'STEPS_COUNT';
