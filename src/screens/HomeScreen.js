@@ -5,18 +5,20 @@ import { fetchFitnessApi } from "../utils";
 import { connect } from "react-redux";
 import { setStepsCount, setUserPoints } from "../actions";
 import { styles } from "./styles";
-import { CircularProgress } from "../components/CircularProgress";
+import { CircularProgress, InfoModal } from "../components";
 import AsyncStorage from "@react-native-community/async-storage";
 import { APP_INSTALLED_DATE } from "../constants/asyncKeys";
 import arrowIcon from "../assets/downArrow.png";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
+import infoIcon from '../assets/info.png';
 
 const HomeScreen = (props) => {
-  const { setStepsCount, steps, setUserPoints } = props;
+  const { setStepsCount, steps, setUserPoints, points } = props;
   const { percent, count, distance } = steps;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [filterDate, setFilterDate] = useState('');
+  const [filterDate, setFilterDate] = useState("");
+  const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
 
   useEffect(() => {
     fetchStepsCount();
@@ -27,7 +29,7 @@ const HomeScreen = (props) => {
     let healthKitOptions = {};
     if (date) {
       healthKitOptions = {
-        date: new Date(date).toISOString()
+        date: new Date(date).toISOString(),
       };
     }
     const res = await fetchFitnessApi(healthKitOptions);
@@ -63,27 +65,43 @@ const HomeScreen = (props) => {
 
   const handleConfirm = (date) => {
     fetchStepsCount(date);
-    const isTodayDate = moment(date).format('YYYY-MM-DD') === moment(new Date()).format('YYYY-MM-DD');
-    setFilterDate(isTodayDate ? "Today" : moment(date).format('YYYY-MM-DD'));
+    const isTodayDate =
+      moment(date).format("YYYY-MM-DD") ===
+      moment(new Date()).format("YYYY-MM-DD");
+    setFilterDate(isTodayDate ? "Today" : moment(date).format("MMM Do YYYY"));
     hideDatePicker();
   };
 
+  const margin = {
+    marginTop: 20
+  }
+
   return (
     <View style={globalStyles.container}>
-      <TouchableOpacity style={[globalStyles.row, styles.dateView]} onPress={() => showDatePicker()}>
+      <TouchableOpacity
+        style={[globalStyles.row, styles.dateView]}
+        onPress={() => showDatePicker()}
+      >
         <Text style={styles.bigTxt}>{filterDate || "Today"}</Text>
         <Image source={arrowIcon} style={styles.icon} />
       </TouchableOpacity>
-      <CircularProgress done={percent} count={count}/>
-      <Text style={[styles.regularTxt, { marginTop: 20 }]}>
+      <CircularProgress done={percent} count={count} />
+      <Text style={[styles.regularTxt, margin]}>
         You have walked {distance} km
       </Text>
+      <TouchableOpacity style={[globalStyles.row, margin, {alignSelf: 'center'}]} onPress={() => setIsInfoModalVisible(true)}>
+      <Text style={styles.regularTxt}>
+        NoiseFit earnings: Rs {points / 100}
+      </Text>
+      <Image source={infoIcon} style={[styles.icon,{marginTop: 0}]}/>
+      </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
+      <InfoModal closeModal={() => setIsInfoModalVisible(false)} visible={isInfoModalVisible} />
     </View>
   );
 };
@@ -91,6 +109,7 @@ const HomeScreen = (props) => {
 const mapStateToProps = (state) => {
   return {
     steps: state.stepsCount,
+    points: state.points,
   };
 };
 
